@@ -66,7 +66,7 @@
                         <td>{{ $products->price }}</td>
                         <td>{{ $products->quantity }}</td>
                         <td><img height="120" width="120" src="products/{{$products->image }}" alt=""></td>
-                        <td><a href="{{ url('edit_product',$products->id)}}" class="btn btn-success">Edit</a></td>
+                        <td><a href="{{ url('edit_product',$products->slug)}}" class="btn btn-success">Edit</a></td>
                         <td><a href="{{ url('delete_product',$products->id)}}" onclick="confirmation(event)" class="btn btn-danger">Delete</a></td>
                     </tr>
                     @endforeach

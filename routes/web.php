@@ -10,6 +10,9 @@ route::get('/',[HomeController::class,'home']);
 
 route::get('/dashboard',[HomeController::class,'login_home'])->middleware(['auth','verified'])->name('dashboard');
 
+route::get('/myorders',[HomeController::class,'myorders'])->middleware(['auth','verified']);
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -37,7 +40,7 @@ route::post('upload_product', [AdminController::class,'upload_product'])->middle
 
 route::get('view_product', [AdminController::class,'view_product'])->middleware(['auth','admin']);
 
-route::get('edit_product/{id}', [AdminController::class,'edit_product'])->middleware(['auth','admin']);
+route::get('edit_product/{slug}', [AdminController::class,'edit_product'])->middleware(['auth','admin']);
 
 route::post('update_product/{id}', [AdminController::class,'update_product'])->middleware(['auth','admin']);
 
@@ -54,6 +57,20 @@ route::get('mycart', [HomeController::class, 'mycart'])->middleware(['auth', 've
 route::get('delete_cart/{id}', [HomeController::class,'delete_cart'])->middleware(['auth','verified']);
 
 route::post('confirm_order', [HomeController::class,'confirm_order'])->middleware(['auth','verified']);
+
+route::get('shop', [HomeController::class, 'shop']);
+
+route::get('why', [HomeController::class, 'why']);
+
+route::get('testimonial', [HomeController::class, 'testimonial']);
+
+route::get('contact', [HomeController::class, 'contact']);
+
+
+Route::controller(HomeController::class)->group(function(){
+    Route::get('stripe/{value}', 'stripe');
+    Route::post('stripe/{value}', 'stripePost')->name('stripe.post');
+});
 
 route::get('view_orders', [AdminController::class,'view_order'])->middleware(['auth','admin']);
 
